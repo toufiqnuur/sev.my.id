@@ -10,6 +10,7 @@ import {
   StackDivider,
   Text,
 } from "@chakra-ui/react";
+import dayjs from "dayjs";
 import { useContext } from "react";
 import { IoLockClosed, IoPencil, IoShare, IoTime } from "react-icons/io5";
 
@@ -45,7 +46,7 @@ export function ListItem({ id, slug, real_url, inserted_at, expired_at, secret_k
         {real_url}
       </Link>
       <Stack direction="row" justify="space-between" alignItems="center">
-        <Text fontSize="sm">{inserted_at}</Text>
+        <Text fontSize="sm">{dayjs(inserted_at).format("DD MMM YYYY HH:mm")}</Text>
         <ButtonGroup size="sm">
           <IconButton
             colorScheme={secret_key ? "teal" : "gray"}
