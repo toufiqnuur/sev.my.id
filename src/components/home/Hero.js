@@ -27,7 +27,7 @@ export default function Hero() {
           <Box pos="absolute" w="full" h="full" bgGradient="radial(whiteAlpha.500, white 75%)" />
         </Box>
         <Image
-          src="/heroo.png"
+          src="/hero.png"
           width={500}
           height={500}
           style={{ margin: "auto" }}
