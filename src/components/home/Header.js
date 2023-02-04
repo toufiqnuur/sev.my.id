@@ -6,18 +6,11 @@ export default function Header() {
   const router = useRouter();
 
   return (
-    <Box
-      w="full"
-      pos="fixed"
-      top={0}
-      bg="whiteAlpha.600"
-      backdropFilter="auto"
-      backdropBlur="xl"
-      zIndex={10}
-    >
+    <Box w="full">
       <Container
         maxW="container.xl"
         h={24}
+        px={[4, 10]}
         display="flex"
         alignItems="center"
         justifyContent="space-between"

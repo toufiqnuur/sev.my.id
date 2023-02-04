@@ -5,15 +5,35 @@ export default function Hero() {
   return (
     <Container
       maxW="container.xl"
-      py={12}
+      pt={4}
+      pb={12}
       display="grid"
       alignItems="center"
       gap={4}
       gridTemplateColumns={{ md: "repeat(2, 1fr)" }}
       pos="relative"
+      px={[4, 10]}
     >
-      <Box order={{ md: 2 }} mt={{ base: 10, md: 12 }}>
-        <Image src="/hero.png" width={800} height={600} alt="" priority />
+      <Box order={{ md: 2 }} pos="relative">
+        <Box
+          bgColor="white"
+          w="full"
+          h="full"
+          pos="absolute"
+          zIndex={-10}
+          bgSize="20px 20px"
+          bgImage="linear-gradient(#444cf7 1px, transparent 1px), linear-gradient(to right, #444cf7 1px, white 1px)"
+        >
+          <Box pos="absolute" w="full" h="full" bgGradient="radial(whiteAlpha.500, white 75%)" />
+        </Box>
+        <Image
+          src="/heroo.png"
+          width={500}
+          height={500}
+          style={{ margin: "auto" }}
+          alt=""
+          priority
+        />
       </Box>
       <Box pos="relative">
         <Heading
