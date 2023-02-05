@@ -11,6 +11,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import dayjs from "dayjs";
+import NextLink from "next/link";
 import { useContext } from "react";
 import { IoLockClosed, IoPencil, IoShare, IoTime } from "react-icons/io5";
 
@@ -20,7 +21,7 @@ export function ListItem({ id, slug, real_url, inserted_at, expired_at, secret_k
   return (
     <Stack direction="column" spacing={4} justify="space-between" p={4}>
       <Stack direction="row" justify="space-between" alignItems="center">
-        <Link fontSize="2xl" fontWeight="semibold" href="#" noOfLines={1}>
+        <Link as={NextLink} fontSize="2xl" fontWeight="semibold" href={`/${slug}`} noOfLines={1}>
           <Highlight query="sev.my.id/" styles={{ color: "cyan.600" }}>
             sev.my.id/
           </Highlight>
@@ -42,7 +43,7 @@ export function ListItem({ id, slug, real_url, inserted_at, expired_at, secret_k
           />
         </ButtonGroup>
       </Stack>
-      <Link href="#" isExternal noOfLines={1}>
+      <Link href={real_url} isExternal noOfLines={1}>
         {real_url}
       </Link>
       <Stack direction="row" justify="space-between" alignItems="center">
