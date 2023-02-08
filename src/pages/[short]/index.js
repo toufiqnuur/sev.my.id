@@ -16,7 +16,7 @@ export default function ShortPage({ page }) {
           </Button>
         </Box>
 
-        {page?.protected && <ProtectedLink urlId={page?.id} />}
+        {page?.protected && !page?.expired?.state && <ProtectedLink urlId={page?.id} />}
         {page?.expired?.state && <ExpiredLink expired={page?.expired} />}
       </Container>
     </>
