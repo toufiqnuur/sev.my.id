@@ -16,6 +16,7 @@
     "@supabase/auth-helpers-nextjs": "^0.5.4",
     "@supabase/auth-helpers-react": "^0.3.1",
     "@supabase/supabase-js": "^2.4.1",
+    "copy-to-clipboard": "^3.3.3",
     "dayjs": "^1.11.7",
     "eslint": "8.32.0",
     "eslint-config-next": "13.1.5",

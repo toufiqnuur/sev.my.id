@@ -1,9 +1,9 @@
 import Features from "@/components/home/Features";
 import Header from "@/components/home/Header";
 import Hero from "@/components/home/Hero";
-import { Box, Container, Grid, Heading, Show, Text, VStack } from "@chakra-ui/react";
+import TrialForm from "@/components/home/TrialForm";
+import { VStack } from "@chakra-ui/react";
 import Head from "next/head";
-import Image from "next/image";
 
 export default function Home() {
   return (
@@ -19,6 +19,7 @@ export default function Home() {
       <VStack spacing={[24, 16]} align="stretch" mt="8">
         <Hero />
         <Features />
+        <TrialForm />
       </VStack>
     </>
   );
