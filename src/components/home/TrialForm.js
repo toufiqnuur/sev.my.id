@@ -136,8 +136,9 @@ export default function TrialForm() {
               mt="8"
               divider={<Divider />}
             >
-              {history.map((item) => (
+              {history.map((item, index) => (
                 <Link
+                  key={index}
                   fontSize="md"
                   color="whiteAlpha.900"
                   href={item.shortUrl}
