@@ -1,7 +1,7 @@
 import Features from "@/components/home/Features";
 import Header from "@/components/home/Header";
 import Hero from "@/components/home/Hero";
-import Statistics from "@/components/home/Statistics";
+// import Statistics from "@/components/home/Statistics";
 import TrialForm from "@/components/home/TrialForm";
 import { VStack } from "@chakra-ui/react";
 import Head from "next/head";
@@ -21,7 +21,7 @@ export default function Home() {
         <Hero />
         <Features />
         <TrialForm />
-        <Statistics />
+        // <Statistics />
       </VStack>
     </>
   );
