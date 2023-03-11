@@ -1,12 +1,13 @@
 import Features from "@/components/home/Features";
 import Header from "@/components/home/Header";
 import Hero from "@/components/home/Hero";
-// import Statistics from "@/components/home/Statistics";
+import Statistics from "@/components/home/Statistics";
 import TrialForm from "@/components/home/TrialForm";
-import { VStack } from "@chakra-ui/react";
+import { Stack } from "@chakra-ui/react";
+import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import Head from "next/head";
 
-export default function Home() {
+export default function Home({ statistics }) {
   return (
     <>
       <Head>
@@ -17,12 +18,32 @@ export default function Home() {
       </Head>
 
       <Header />
-      <VStack spacing={[24, 16]} align="stretch" mt="8">
+      <Stack spacing={[24, 16]} align="stretch" mt="8">
         <Hero />
         <Features />
+        <Statistics data={statistics} />
         <TrialForm />
-        // <Statistics />
-      </VStack>
+      </Stack>
     </>
   );
+}
+
+export async function getServerSideProps(ctx) {
+  const supabaseServer = createServerSupabaseClient(ctx);
+
+  const { data: distinct_users } = await supabaseServer
+    .from("distinct_users")
+    .select("user_id");
+  const { data: views } = await supabaseServer.from("views").select("count");
+  const { data: urls } = await supabaseServer.from("urls").select("id");
+
+  return {
+    props: {
+      statistics: {
+        userCount: distinct_users,
+        userClicks: views,
+        linkCount: urls,
+      },
+    },
+  };
 }
