@@ -1,9 +1,16 @@
 import { ModalContext, ModalTypes } from "@/context/ModalContext";
-import { Modal, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay } from "@chakra-ui/react";
+import {
+  Modal,
+  ModalCloseButton,
+  ModalContent,
+  ModalHeader,
+  ModalOverlay,
+} from "@chakra-ui/react";
 import { useContext } from "react";
 import ModalSecret from "./ModalContent/ModalSecret";
 import ModalShort from "./ModalContent/ModalShort";
 import ModalTime from "./ModalContent/ModalTime";
+import ModalQrCode from "./ModalContent/ModalQrCode";
 
 export default function ActionModal() {
   const { open, toggleModal, type, props } = useContext(ModalContext);
@@ -21,10 +28,19 @@ export default function ActionModal() {
       title: "Protected Link",
       component: <ModalSecret {...props} />,
     },
+    [ModalTypes.QRCODE]: {
+      title: "Qr Code Image",
+      component: <ModalQrCode {...props} />,
+    },
   };
 
   return (
-    <Modal isOpen={open} onClose={toggleModal} closeOnOverlayClick={false} size="lg">
+    <Modal
+      isOpen={open}
+      onClose={toggleModal}
+      closeOnOverlayClick={false}
+      size="lg"
+    >
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>{ModalBody[type]?.title}</ModalHeader>

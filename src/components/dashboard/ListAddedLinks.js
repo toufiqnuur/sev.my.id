@@ -76,6 +76,15 @@ export function ListItem({
             </MenuButton>
             <MenuList>
               <MenuItem onClick={copyToClipboard}>Copy to Clipboard</MenuItem>
+              <MenuItem
+                onClick={() =>
+                  toggleModal(ModalTypes.QRCODE, {
+                    shortUrl: `${BASE_URL}/${slug}`,
+                  })
+                }
+              >
+                Qr Code
+              </MenuItem>
             </MenuList>
           </Menu>
         </ButtonGroup>
