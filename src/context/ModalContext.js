@@ -14,6 +14,7 @@ export const ModalTypes = {
   SHORT: "modal-short",
   TIME: "modal-time",
   SECRET: "modal-secret",
+  QRCODE: "modal-qrcode",
 };
 
 export const ModalProvider = ({ children }) => {
