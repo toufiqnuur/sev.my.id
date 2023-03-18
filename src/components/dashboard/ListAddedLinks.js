@@ -19,8 +19,10 @@ import {
 } from "@chakra-ui/react";
 import copy from "copy-to-clipboard";
 import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
 import NextLink from "next/link";
 import { useContext } from "react";
+import { HiOutlineClipboardCopy, HiQrcode } from "react-icons/hi";
 import { IoLockClosed, IoPencil, IoShare, IoTime } from "react-icons/io5";
 
 export function ListItem({
@@ -44,6 +46,10 @@ export function ListItem({
       position: "top",
     });
   };
+
+  const isExpired = expired_at < new Date().toISOString();
+
+  dayjs.extend(relativeTime);
 
   return (
     <Stack direction="column" spacing={4} justify="space-between" p={4}>
@@ -75,8 +81,14 @@ export function ListItem({
               <IoShare />
             </MenuButton>
             <MenuList>
-              <MenuItem onClick={copyToClipboard}>Copy to Clipboard</MenuItem>
               <MenuItem
+                icon={<HiOutlineClipboardCopy size={18} />}
+                onClick={copyToClipboard}
+              >
+                Copy
+              </MenuItem>
+              <MenuItem
+                icon={<HiQrcode size={18} />}
                 onClick={() =>
                   toggleModal(ModalTypes.QRCODE, {
                     shortUrl: `${BASE_URL}/${slug}`,
@@ -104,13 +116,13 @@ export function ListItem({
             icon={<IoLockClosed />}
             onClick={() => toggleModal(ModalTypes.SECRET, { id, secret_key })}
           />
-          <IconButton
-            colorScheme={expired_at ? "teal" : "gray"}
-            aria-label="Edit time"
-            fontSize="16px"
-            icon={<IoTime />}
+          <Button
+            colorScheme={expired_at ? (isExpired ? "red" : "teal") : "gray"}
+            px={isExpired ? "4" : "2"}
             onClick={() => toggleModal(ModalTypes.TIME, { id, expired_at })}
-          />
+          >
+            {isExpired ? dayjs(expired_at).fromNow() : <IoTime size={16} />}
+          </Button>
         </ButtonGroup>
       </Stack>
     </Stack>
