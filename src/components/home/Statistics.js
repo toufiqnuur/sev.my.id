@@ -1,6 +1,31 @@
-import { Container, Stack, Box, Heading, Text } from "@chakra-ui/react";
+import { Box, Container, Grid, Heading, Text } from "@chakra-ui/react";
 import { FaLink, FaUserAstronaut } from "react-icons/fa";
 import { HiCursorClick } from "react-icons/hi";
+
+export function StatColumn({ icon, count, desc }) {
+  return (
+    <Box
+      display="flex"
+      flexWrap="wrap"
+      alignItems="center"
+      justifyContent="center"
+    >
+      {icon}
+      <Text fontSize={["5xl", "6xl"]} ml="4" fontWeight="black" color="white">
+        {count}
+      </Text>
+      <Text
+        w="full"
+        textAlign="center"
+        color="#B6EADA"
+        letterSpacing={-0.5}
+        fontSize={{ lg: "lg" }}
+      >
+        {desc}
+      </Text>
+    </Box>
+  );
+}
 
 export default function Statistics({ data }) {
   return (
@@ -9,41 +34,40 @@ export default function Statistics({ data }) {
       alignSelf="center"
       bg={{ md: "blackAlpha.50" }}
       rounded="3xl"
+      pt={12}
+      pb={20}
     >
-      <Stack
-        direction={["column", "row"]}
-        justify="space-evenly"
-        py="16"
+      <Heading
+        textAlign="center"
+        color="white"
+        fontSize={["4xl", "5xl"]}
+        letterSpacing={-1}
+        lineHeight={1}
+      >
+        Described in number
+      </Heading>
+
+      <Grid
+        gridTemplateColumns={["repeat(2, 1fr)", "repeat(3, 1fr)"]}
+        mt={16}
         rowGap="10"
       >
-        <Box display="flex" alignItems="center" alignSelf="center">
-          <FaUserAstronaut size={48} color="royalblue" />
-          <Heading fontSize="6xl" ml="4">
-            {data.userCount.length}
-          </Heading>
-          <Text alignSelf="end" fontSize="xl">
-            Active users
-          </Text>
-        </Box>
-        <Box display="flex" alignItems="center" alignSelf="center">
-          <HiCursorClick size={48} color="royalblue" />
-          <Heading fontSize="6xl" ml="4">
-            {data.userClicks.reduce((acc, item) => acc + item.count, 0)}
-          </Heading>
-          <Text alignSelf="end" fontSize="xl">
-            Clicks
-          </Text>
-        </Box>
-        <Box display="flex" alignItems="center" alignSelf="center">
-          <FaLink size={48} color="royalblue" />
-          <Heading fontSize="6xl" ml="4">
-            {data.linkCount.length}
-          </Heading>
-          <Text alignSelf="end" fontSize="xl">
-            Shorten links
-          </Text>
-        </Box>
-      </Stack>
+        <StatColumn
+          icon={<FaUserAstronaut size={[48]} color="rgba(255,255,255,0.5)" />}
+          count={data.userCount.length}
+          desc="Active users arround the world"
+        />
+        <StatColumn
+          icon={<HiCursorClick size={48} color="rgba(255,255,255,0.5)" />}
+          count={data.userClicks.reduce((acc, item) => acc + item.count, 0)}
+          desc="Shorten urls have been visited"
+        />
+        <StatColumn
+          icon={<FaLink size={42} color="rgba(255,255,255,0.5)" />}
+          count={data.linkCount.length}
+          desc="Long links have been shortened"
+        />
+      </Grid>
     </Container>
   );
 }
