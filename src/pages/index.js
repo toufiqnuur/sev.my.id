@@ -1,9 +1,10 @@
 import Features from "@/components/home/Features";
+import Footer from "@/components/home/Footer";
 import Header from "@/components/home/Header";
 import Hero from "@/components/home/Hero";
 import Statistics from "@/components/home/Statistics";
 import TrialForm from "@/components/home/TrialForm";
-import { Stack } from "@chakra-ui/react";
+import { Box, Stack } from "@chakra-ui/react";
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import Head from "next/head";
 
@@ -17,13 +18,16 @@ export default function Home({ statistics }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Header />
-      <Stack spacing={[24, 16]} align="stretch" mt="8">
-        <Hero />
-        <Features />
-        <Statistics data={statistics} />
-        <TrialForm />
-      </Stack>
+      <Box bg="#03001C" overflow="hidden">
+        <Header />
+        <Stack spacing={[24, 16]} align="stretch" mt="8">
+          <Hero />
+          <Features />
+          <Statistics data={statistics} />
+          <TrialForm />
+        </Stack>
+        <Footer />
+      </Box>
     </>
   );
 }

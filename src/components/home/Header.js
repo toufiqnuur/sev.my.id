@@ -1,25 +1,28 @@
 import { Box, Button, Container } from "@chakra-ui/react";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import { HiOutlineArrowCircleRight } from "react-icons/hi";
 
 export default function Header() {
   const router = useRouter();
 
   return (
-    <Box w="full">
+    <Box w="full" pos="relative" zIndex={100}>
       <Container
         maxW="container.xl"
-        h={24}
+        h={28}
         px={[4, 10]}
         display="flex"
         alignItems="center"
         justifyContent="space-between"
       >
-        <Image src="/logo.png" width={160} height={80} alt="" style={{ marginLeft: "-16px" }} />
+        <Image src="/brand.svg" width={60} height={80} alt="" priority />
         <Button
-          colorScheme="twitter"
+          colorScheme="gray"
           size="lg"
-          borderRadius="2xl"
+          borderRadius="full"
+          textTransform="uppercase"
+          rightIcon={<HiOutlineArrowCircleRight />}
           onClick={() => router.push("/auth/login")}
         >
           Login

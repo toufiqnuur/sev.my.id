@@ -2,18 +2,19 @@ import { BASE_URL } from "@/constant";
 import { Api } from "@/libs/api";
 import {
   Box,
-  Button,
   Container,
-  Divider,
   Heading,
+  IconButton,
   Input,
-  Link,
-  Stack,
+  InputGroup,
+  InputRightElement,
+  Text,
   useToast,
 } from "@chakra-ui/react";
 import copy from "copy-to-clipboard";
 import dayjs from "dayjs";
 import { useEffect, useState } from "react";
+import { HiArrowRight, HiClipboard, HiX } from "react-icons/hi";
 
 export default function TrialForm() {
   const [history, setHistory] = useState([]);
@@ -66,91 +67,60 @@ export default function TrialForm() {
   }, [shortUrl, history]);
 
   return (
-    <Box bg="blue.500">
-      <Container py={16} maxW="container.lg">
+    <Box bgImg="linear-gradient(to bottom, #03001C, #301E67)" id="trial">
+      <Container py={16} px={[8, 0]} maxW="container.lg">
+        <Heading
+          textAlign="center"
+          color="white"
+          fontSize={["4xl", "5xl"]}
+          letterSpacing={-1}
+          lineHeight={1}
+        >
+          Just try it out
+        </Heading>
+        <Text
+          color="whiteAlpha.800"
+          textAlign="center"
+          mt={2}
+          fontSize={["lg", "xl"]}
+          letterSpacing={-0.5}
+          mb={16}
+        >
+          You can try it out without logging in, just like magic.
+        </Text>
         <form onSubmit={handleSubmit}>
-          <Stack direction={["column", "row"]}>
+          <InputGroup size="lg">
             <Input
               value={inputUrl || shortUrl}
               onChange={(e) => setInputUrl(e.target.value)}
-              isDisabled={shortUrl}
+              pr={16}
               type="url"
+              variant="filled"
               placeholder="Insert your long url here"
-              bg="whiteAlpha.700"
-              borderColor="white"
-              _hover={{ borderColor: "white" }}
-              _focus={{ borderColor: "white" }}
-              size="lg"
-              rounded="full"
+              _focus={{ background: "white" }}
+              isReadOnly={shortUrl}
               isRequired
             />
-            {shortUrl ? (
-              <>
-                <Button
-                  onClick={copyShorten}
-                  bg="whiteAlpha.800"
-                  size="lg"
-                  rounded="full"
-                  px="8"
-                >
-                  Copy
-                </Button>
-                <Button
-                  onClick={clearForm}
-                  bg="whiteAlpha.800"
-                  size="lg"
-                  rounded="full"
-                  px="8"
-                >
-                  Clear
-                </Button>
-              </>
-            ) : (
-              <Button
+            <InputRightElement w={shortUrl ? 24 : 12}>
+              <IconButton
+                display={shortUrl ? "flex" : "none"}
+                mr={1}
+                aria-label="clear"
+                colorScheme="orange"
+                icon={<HiX />}
+                onClick={clearForm}
+              />
+              <IconButton
+                type={shortUrl ? "button" : "submit"}
+                aria-label="Short url"
+                colorScheme="facebook"
                 isLoading={loading}
-                type="submit"
-                bg="whiteAlpha.800"
-                size="lg"
-                rounded="full"
-                px="8"
-              >
-                Shorten
-              </Button>
-            )}
-          </Stack>
+                icon={shortUrl ? <HiClipboard /> : <HiArrowRight />}
+                onClick={shortUrl ? copyShorten : null}
+              />
+            </InputRightElement>
+          </InputGroup>
         </form>
-        {!!history.length && (
-          <Box mt="8">
-            <Heading
-              as="h5"
-              fontSize="2xl"
-              color="whiteAlpha.900"
-              textAlign="center"
-            >
-              History
-            </Heading>
-            <Stack
-              direction="column"
-              maxW="2xl"
-              mx="auto"
-              mt="8"
-              divider={<Divider />}
-            >
-              {history.map((item, index) => (
-                <Link
-                  key={index}
-                  fontSize="md"
-                  color="whiteAlpha.900"
-                  href={item.shortUrl}
-                  rel="noopener"
-                  isExternal
-                >
-                  {item.shortUrl}
-                </Link>
-              ))}
-            </Stack>
-          </Box>
-        )}
       </Container>
     </Box>
   );
