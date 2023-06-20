@@ -45,25 +45,25 @@ export async function getServerSideProps(ctx) {
     // update views
     await supabaseServer
       .from("urls")
-      .update({ hit: data.hit++ })
+      .update({ hit: data.hit + 1 })
       .eq("id", data.user_id);
     // update analytics
     const { data: views } = await supabaseServer
       .from("views")
       .select()
+      .match({ url_id: data.id, date: dayjs().format("YYYY-MM-DD") })
       .single();
     if (views) {
       await supabaseServer
         .from("views")
-        .update({ count: data.count++ })
-        .eq("date", dayjs().format("YYYY-MM-DD"))
-        .eq("url_id", data.id);
+        .update({ count: views.count + 1 })
+        .match({ url_id: data.id, date: dayjs().format("YYYY-MM-DD") });
     } else {
       await supabaseServer.from("views").insert({
         url_id: data.id,
         user_id: data.user_id,
         count: 1,
-        date: new Date(),
+        date: dayjs().format("YYYY-MM-DD"),
       });
     }
   };
