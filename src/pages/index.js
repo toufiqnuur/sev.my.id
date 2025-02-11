@@ -35,19 +35,14 @@ export default function Home({ statistics }) {
 export async function getServerSideProps(ctx) {
   const supabaseServer = createServerSupabaseClient(ctx);
 
-  const { data: distinct_users } = await supabaseServer
-    .from("distinct_users")
-    .select("user_id");
-  const { data: views } = await supabaseServer.from("views").select("count");
-  const { data: urls } = await supabaseServer.from("urls").select("id");
+  let { data: statistics_view, error } = await supabaseServer
+    .from('statistics_view')
+    .select('*')
+    .single();
 
   return {
     props: {
-      statistics: {
-        userCount: distinct_users,
-        userClicks: views,
-        linkCount: urls,
-      },
+      statistics: statistics_view
     },
   };
 }

@@ -54,17 +54,17 @@ export default function Statistics({ data }) {
       >
         <StatColumn
           icon={<FaUserAstronaut size={[48]} color="rgba(255,255,255,0.5)" />}
-          count={data.userCount.length}
+          count={data.users}
           desc="Active users arround the world"
         />
         <StatColumn
           icon={<HiCursorClick size={48} color="rgba(255,255,255,0.5)" />}
-          count={data.userClicks.reduce((acc, item) => acc + item.count, 0)}
+          count={data.visitors}
           desc="Shorten urls have been visited"
         />
         <StatColumn
           icon={<FaLink size={42} color="rgba(255,255,255,0.5)" />}
-          count={data.linkCount.length}
+          count={data.links}
           desc="Long links have been shortened"
         />
       </Grid>
